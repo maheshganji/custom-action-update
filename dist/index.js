@@ -2866,6 +2866,8 @@ const main = async() => {
         console.log("REST endpoint Url 12 -> "+restendpoint);
     
         try {
+             console.log("user name->"+username);
+             console.log("password" +passwd);
             const token = `${username}:${passwd}`;
             const encodedToken = Buffer.from(token).toString('base64');
     
