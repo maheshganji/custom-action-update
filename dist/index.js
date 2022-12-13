@@ -2863,7 +2863,7 @@ const main = async() => {
         const restendpoint = `${instanceUrl}/api/sn_devops/v1/devops/orchestration/changeInfo?changeRequestNumber=${changeRequestNumber}`;
         let response;
     
-        console.log("REST endpoint Url -> "+restendpoint);
+        console.log("REST endpoint Url 12 -> "+restendpoint);
     
         try {
             const token = `${username}:${passwd}`;
