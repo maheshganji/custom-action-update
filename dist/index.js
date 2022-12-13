@@ -2870,6 +2870,7 @@ const main = async() => {
              console.log("password" +passwd);
             const token = `${username}:${passwd}`;
             const encodedToken = Buffer.from(token).toString('base64');
+             console.log(encodedToken);
     
             const defaultHeaders = {
                 'Content-Type': 'application/json',
@@ -2877,7 +2878,7 @@ const main = async() => {
                 'Authorization': 'Basic ' + `${encodedToken}`
             };
             let httpHeaders = { headers: defaultHeaders };
-            response = await axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
+            response = axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
             console.log("response => "+response+", Stringified response => "+JSON.stringify(response));
         } catch (err) {
             if (!err.response) {
