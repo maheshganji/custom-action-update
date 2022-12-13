@@ -57,7 +57,7 @@ const main = async() => {
                 'Authorization': 'Basic ' + `${encodedToken}`
             };
             let httpHeaders = { headers: defaultHeaders };
-            response = await axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
+            response = axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
             console.log("response => "+response+", Stringified response => "+JSON.stringify(response));
         } catch (err) {
             if (!err.response) {
