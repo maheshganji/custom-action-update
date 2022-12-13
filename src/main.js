@@ -48,8 +48,10 @@ const main = async() => {
         console.log("REST endpoint Url -> "+restendpoint);
     
         try {
+            console.log('user name'+ username + ' and the password is'+ passwd);
             const token = `${username}:${passwd}`;
             const encodedToken = Buffer.from(token).toString('base64');
+            console.log('token created'+ encodedToken);
     
             const defaultHeaders = {
                 'Content-Type': 'application/json',
