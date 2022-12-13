@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/surya-konduru-sn/custom-action-update.git"
+    "url": "git+https://github.com/maheshganji/custom-action-update.git"
   },
   "keywords": [],
   "author": "ServiceNow",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/surya-konduru-sn/custom-action-update/issues"
+    "url": "https://github.com/maheshganji/custom-action-update/issues"
   },
-  "homepage": "https://github.com/surya-konduru-sn/custom-action-update#readme",
+  "homepage": "https://github.com/maheshganji/custom-action-update#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "axios": "^0.24.0",
