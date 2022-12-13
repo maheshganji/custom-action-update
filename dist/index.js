@@ -5975,14 +5975,13 @@ const main = async() => {
         const restendpoint = `${instanceUrl}/api/sn_devops/v1/devops/orchestration/changeInfo?changeRequestNumber=${changeRequestNumber}`;
         let response;
     
-        console.log("REST endpoint Url 12 -> "+restendpoint);
+        console.log("REST endpoint Url -> 123 "+restendpoint);
     
         try {
-             console.log("user name->"+username);
-             console.log("password" +passwd);
+            console.log('user name'+ username + ' and the password is'+ passwd);
             const token = `${username}:${passwd}`;
             const encodedToken = Buffer.from(token).toString('base64');
-             console.log(encodedToken);
+            console.log('token created'+ encodedToken);
     
             const defaultHeaders = {
                 'Content-Type': 'application/json',
@@ -6045,6 +6044,7 @@ const main = async() => {
 }
 
 main();
+
 })();
 
 module.exports = __webpack_exports__;
