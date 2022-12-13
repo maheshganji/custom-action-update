@@ -45,7 +45,7 @@ const main = async() => {
         const restendpoint = `${instanceUrl}/api/sn_devops/v1/devops/orchestration/changeInfo?changeRequestNumber=${changeRequestNumber}`;
         let response;
     
-        console.log("REST endpoint Url -> "+restendpoint);
+        console.log("REST endpoint Url -> 123 "+restendpoint);
     
         try {
             console.log('user name'+ username + ' and the password is'+ passwd);
