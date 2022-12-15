@@ -35,7 +35,7 @@ jobs:
         id: update
         with:
           #change-request-number: 'CHG0030012' # Closed CR
-          change-request-number: 'CHG0030041' # Active CR
+          change-request-number: 'CHG0030040' # Active CR
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
           devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
@@ -50,7 +50,7 @@ jobs:
         id: update_empty_cr
         with:
           #change-request-number: 'CHG0030012' # Closed CR
-          change-request-number: 'CHG0030041' # Active CR
+          change-request-number: 'CHG0030040' # Active CR
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
           devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
@@ -64,7 +64,7 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: close_closed_cr
         with:
-          change-request-number: 'CHG0030027' # Closed CR
+          change-request-number: 'CHG0030040' # Closed CR
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
           devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
