@@ -8,7 +8,7 @@ const main = async() => {
     const instanceUrl = core.getInput('instance-url', { required: true });
     const username = core.getInput('devops-integration-user-name', { required: true });
     const passwd = core.getInput('devops-integration-user-password', { required: true });
-    const changeRequestNumber = core.getInput('change-request-number');//#TODO - Need to add required:true
+    const changeRequestNumber = core.getInput('change-request-number', { required: true });
     
     let changeRequestDetailsStr = core.getInput('change-request-details', { required: true });
     let githubContextStr = core.getInput('context-github', { required: true });
@@ -19,7 +19,8 @@ const main = async() => {
         console.log('Calling Update Change Control API to update change.... for changeRequestNumber => '+changeRequestNumber); 
     
         let changeRequestDetails;
-    
+        let githubContext;
+
         if(changeRequestNumber == ""){
             console.error("Please Provide a valid 'Change Request Number' to proceed with Update Change Request"); 
             return;
@@ -33,7 +34,6 @@ const main = async() => {
             return;
         }
     
-        let githubContext;
     
         try {
             githubContext = JSON.parse(githubContextStr);
@@ -45,13 +45,9 @@ const main = async() => {
         const restendpoint = `${instanceUrl}/api/sn_devops/v1/devops/orchestration/changeInfo?changeRequestNumber=${changeRequestNumber}`;
         let response;
     
-        console.log("REST endpoint Url -> 123 "+restendpoint);
-    
         try {
-            console.log('user name'+ username + ' and the password is'+ passwd);
             const token = `${username}:${passwd}`;
             const encodedToken = Buffer.from(token).toString('base64');
-            console.log('token created'+ encodedToken);
     
             const defaultHeaders = {
                 'Content-Type': 'application/json',
@@ -59,14 +55,21 @@ const main = async() => {
                 'Authorization': 'Basic ' + `${encodedToken}`
             };
             let httpHeaders = { headers: defaultHeaders };
-            response = axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
-            console.log("response => "+response+", Stringified response => "+JSON.stringify(response));
+            response = await axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
+            if(response.data && response.data.result){
+                status = response.data.result.status;
+                console.log("Status of the Update => "+status+", and the message => "+response.data.result.message);
+            }else{
+                status = "NOT SUCCESSFUL";
+                console.error('No response from ServiceNow. Please check ServiceNow logs for more details.');
+            }
+            
         } catch (err) {
             if (!err.response) {
-                status = "SUCCESS";
-                console.log('Update Successful.');            
+                status = "NOT SUCCESSFUL";
+                console.error('No response from ServiceNow. Please check ServiceNow logs for more details.');
             }else{
-
+                status = "FAILURE";
                 if (err.message.includes('ECONNREFUSED') || err.message.includes('ENOTFOUND')) {
                     console.error('Invalid ServiceNow Instance URL. Please correct the URL and try again.');
                 }
@@ -89,14 +92,14 @@ const main = async() => {
                     let responseData = err.response.data;
                     if (responseData && responseData.error && responseData.error.message) {
                         errMsg = errMsg + responseData.error.message + errMsgSuffix;
-                        console.error("Inside, if, errMsg => "+errMsg);
                     } else if (responseData && responseData.result && responseData.result.details && responseData.result.details.errors) {
                         let errors = err.response.data.result.details.errors;
                         for (var index in errors) {
                             errMsg = errMsg + errors[index].message + errMsgSuffix;
                         }
-                        console.error("Inside, else-if, errMsg => "+errMsg);
                     }
+                    console.error(errMsg);
+
                 }
             }
         }
@@ -110,7 +113,7 @@ const main = async() => {
         core.setOutput("status",status);
        core.setFailed(error.message)
    }
-    
+   core.setOutput("status",status); 
 }
 
 main();
