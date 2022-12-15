@@ -5986,6 +5986,7 @@ const main = async() => {
             };
             let httpHeaders = { headers: defaultHeaders };
             response = await axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
+            console.log(JSON.stringify(response.data));
             if(response.data && response.data.result){
                 status = response.data.result.status;
                 console.log("Status of the Update => "+status+", and the message => "+response.data.result.message);
