@@ -25,7 +25,19 @@ const main = async() => {
             console.error("Please Provide a valid 'Change Request Number' to proceed with Update Change Request"); 
             return;
         }
-    
+        if(instanceUrl == ""){
+            console.error("Please Provide a valid 'Instance Url' to proceed with Update Change Request"); 
+            return;
+        }
+        if(passwd == ""){
+            console.error("Please Provide a valid 'Password' to proceed with Update Change Request"); 
+            return;
+        }
+        if(username == ""){
+            console.error("Please Provide a valid 'User Name' to proceed with Update Change Request"); 
+            return;
+        }
+
         try {
           changeRequestDetails = JSON.parse(changeRequestDetailsStr);
         } catch (e) {
@@ -56,7 +68,6 @@ const main = async() => {
             };
             let httpHeaders = { headers: defaultHeaders };
             response = await axios.put(restendpoint, changeRequestDetailsStr, httpHeaders);
-            console.log(JSON.stringify(response.data));
             if(response.data && response.data.result){
                 status = response.data.result.status;
                 console.log("Status of the Update => "+status+", and the message => "+response.data.result.message);
