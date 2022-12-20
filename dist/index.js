@@ -5935,10 +5935,10 @@ const main = async() => {
    let status = "NOT-STARTED";
    try{
     console.log('Custom Action - UPDATE => START');    
-    const instanceUrl = core.getInput('instance-url', { required: true });
-    const username = core.getInput('devops-integration-user-name', { required: true });
-    const passwd = core.getInput('devops-integration-user-password', { required: true });
-    const changeRequestNumber = core.getInput('change-request-number', { required: true });
+    const instanceUrl = core.getInput('instance-url');
+    const username = core.getInput('devops-integration-user-name');
+    const passwd = core.getInput('devops-integration-user-password');
+    const changeRequestNumber = core.getInput('change-request-number');
     
     let changeRequestDetailsStr = core.getInput('change-request-details', { required: true });
     let githubContextStr = core.getInput('context-github', { required: true });
