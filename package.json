@@ -22,6 +22,7 @@
   "dependencies": {
     "@actions/core": "^1.9.1",
     "axios": "^0.24.0",
-    "follow-redirects": "^1.15.1"
+    "follow-redirects": "^1.15.1",
+    "@vercel/ncc": "^0.34.0"
   }
 }
