@@ -1,6 +1,6 @@
 {
   "name": "custom-action-update",
-  "version": "1.0.0",
+  "version": "master",
   "main": "dist/index.js",
   "description": "A Github Action to pause/resume workflow run for a ServiceNow Change Request Approval.",
   "scripts": {
