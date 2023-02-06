@@ -35,11 +35,11 @@ jobs:
         uses: ./ 
         id: update
         with:
-          change-request-number: 'CHG00300071'
+          change-request-number: 'CHG0030007'
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
           devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           context-github: ${{ toJSON(github) }}
-          change-request-details: '{"state":"3","close_code":"successful", "close_notes":"Closing during Github Actions CustomActionUpdate","short_description": "Test description in Updated by Github custom Action","description":"Automated Software Deployment."}'
+          change-request-details: '{"state1":"3","close_code":"successful", "close_notes1":"Closing during Github Actions CustomActionUpdate","short_description": "Test description in Updated by Github custom Action","description":"Automated Software Deployment."}'
       - name: Output of UpdateChangeDetails
         run: echo "The Status of Update Change Request Details => ${{ steps.update.outputs.status }}"
