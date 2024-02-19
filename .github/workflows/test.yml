@@ -1,7 +1,12 @@
 name: Test
 
-on:
-  workflow_dispatch:
+on: 
+  # workflow_dispatch
+  # push:
+  #   branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    types: [opened, synchronize, reopened]
     
 jobs:
 
@@ -23,25 +28,25 @@ jobs:
 
     - name: Compile
       run: npm run build
-  UpdateChangeDetails:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Servicenow Update Change Details
+  # UpdateChangeDetails:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   name: Servicenow Update Change Details
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Servicenow Update Change Details
-        uses: ./ 
-        id: update
-        with:
-          change-request-number: 'CHG0030007'
-          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-          devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          context-github: ${{ toJSON(github) }}
-          change-request-details: '{"state":"3","close_code":"successful", "close_notes":"Closing during Github Actions CustomActionUpdate","short_description": "Test description in Updated by Github custom Action","description":"Automated Software Deployment."}'
-      - name: Output of UpdateChangeDetails
-        run: echo "The Status of Update Change Request Details => ${{ steps.update.outputs.status }}"
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Servicenow Update Change Details
+  #       uses: ./ 
+  #       id: update
+  #       with:
+  #         change-request-number: 'CHG0030007'
+  #         devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+  #         devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+  #         instance-url: ${{ secrets.SN_INSTANCE_URL }}
+  #         context-github: ${{ toJSON(github) }}
+  #         change-request-details: '{"state":"3","close_code":"successful", "close_notes":"Closing during Github Actions CustomActionUpdate","short_description": "Test description in Updated by Github custom Action","description":"Automated Software Deployment."}'
+  #     - name: Output of UpdateChangeDetails
+  #       run: echo "The Status of Update Change Request Details => ${{ steps.update.outputs.status }}"
 
         #testing 123
